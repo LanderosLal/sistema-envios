@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Landeros Express | Panel</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="navbar">
+        <h3>📦 Landeros Express</h3>
+        <div>
+            <span id="saludoUsuario" style="margin-right: 10px; font-weight: 500;">Hola, Cliente</span>
+            <button onclick="logout()" class="btn-logout">Salir</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="sidebar">
+            <h4>👤 Destinatario</h4>
+            <div class="input-group">
+                <input type="text" id="txtNombre" placeholder="Nombre completo">
+                <input type="tel" id="txtTelefono" placeholder="Teléfono">
+                <input type="email" id="txtCorreo" placeholder="Correo electrónico">
+            </div>
+
+            <h4>📦 Detalle del Paquete</h4>
+            <div class="input-group">
+                <select id="selPeso" onchange="calcularTarifa()">
+                    <option value="pequeno">Sobre / Pequeño (hasta 1 kg)</option>
+                    <option value="mediano">Mediano (1 a 5 kg) [+ $30]</option>
+                    <option value="grande">Grande (5 a 15 kg) [+ $70]</option>
+                    <option value="extragrande">Extra Grande (15 a 30 kg) [+ $120]</option>
+                </select>
+            </div>
+
+            <h4>📍 Ruta</h4>
+            <div class="input-group">
+                <div class="search-box">
+                    <input type="text" id="txtOrigen" placeholder="Punto de Origen">
+                    <button onclick="buscarDireccion('origen')">🔍</button>
+                </div>
+                <div class="search-box">
+                    <input type="text" id="txtDestino" placeholder="Punto de Destino">
+                    <button onclick="buscarDireccion('destino')">🔍</button>
+                </div>
+            </div>
+
+            <div class="resumen-box">
+                <p><span>Distancia:</span> <span id="lblDistancia">0 km</span></p>
+                <p class="total"><span>Total a pagar:</span> <span id="lblCostoTotal">$0</span></p>
+            </div>
+            
+            <input type="hidden" id="txtDistancia">
+            <input type="hidden" id="txtCosto">
+
+            <button onclick="generarGuia()" class="btn-main">Generar y Enviar Guía</button>
+
+            <h4 style="margin-top: 20px;">💾 Base de Datos Local</h4>
+            <div class="db-buttons">
+                <button onclick="descargarBaseDatos()" class="btn-db">📥 Exportar (.json)</button>
+                <button onclick="borrarBaseDatos()" class="btn-db-danger">🗑️ Limpiar Todo</button>
+            </div>
+
+            <h4 style="margin-top: 20px;">📜 Mis Envíos</h4>
+            <table>
+                <thead><tr><th>Guía</th><th>Recibe</th><th>Acción</th></tr></thead>
+                <tbody id="listaGuias"></tbody>
+            </table>
+        </div>
+
+        <div id="map" class="map-container"></div>
+    </div>
+
+    <div id="miModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarModal()">&times;</span>
+            <h2 style="margin-bottom: 5px; font-weight: 800;">LANDEROS</h2>
+            <h3 id="lblGuiaID" style="margin: 0 0 15px 0; color: #555; border-bottom: 2px dashed #ccc; padding-bottom: 10px;">GUÍA #000</h3>
+            
+            <div style="font-size: 0.8rem; text-align: left; line-height: 1.6;">
+                <p><strong>RECIBE:</strong> <span id="lblNombreModal"></span></p>
+                <p><strong>TEL:</strong> <span id="lblTelModal"></span></p>
+                <p><strong>ORIGEN:</strong> <span id="lblOrigenModal"></span></p>
+                <p><strong>DEST:</strong> <span id="lblDestinoModal"></span></p>
+                <p style="margin-top: 10px; font-size: 1rem; text-align: center;"><strong>TOTAL: <span id="lblCostoModal"></span></strong></p>
+            </div>
+            
+            <div class="qr-code">
+                <img id="imgQR" src="" alt="QR" width="120" height="120">
+            </div>
+            <button onclick="window.print()" class="btn-main" style="margin-bottom: 10px;">🖨️ Imprimir</button>
+            <p id="txtMensajeCorreo" style="font-size: 0.75rem; font-weight: bold; font-family: 'Inter', sans-serif;"></p>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/map.js"></script>
+    <script>
+        // Recuerda volver a poner tu código real aquí
+        emailjs.init("wXGyAegA4Po2L9AIA");
+
+        const usuario = localStorage.getItem('sesionActiva') || 'Invitado';
+        document.getElementById('saludoUsuario').innerText = "Hola, " + usuario.toUpperCase();
+        function logout() { localStorage.removeItem('sesionActiva'); window.location.href = 'index.html'; }
+    </script>
+</body>
+</html>
