@@ -1,0 +1,80 @@
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+body { background-color: #f7f9fc; color: #333; }
+.navbar { background: #fff; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eaeaea; }
+.navbar h2 { font-size: 20px; font-weight: 600; }
+#logout-btn { background: transparent; border: 1px solid #333; padding: 8px 15px; border-radius: 5px; cursor: pointer; }
+
+.dashboard-container { display: flex; padding: 30px; gap: 30px; height: 70vh; }
+.form-section, .map-section { background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); }
+.form-section { flex: 1; display: flex; flex-direction: column; overflow-y: auto; }
+.map-section { flex: 2; display: flex; flex-direction: column; }
+#map { flex-grow: 1; border-radius: 8px; z-index: 1; }
+
+h3 { margin-bottom: 15px; font-size: 16px; border-bottom: 2px solid #000; display: inline-block; padding-bottom: 5px; }
+.input-group { margin-bottom: 15px; }
+.row { display: flex; gap: 10px; }
+input, select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; outline: none; margin-bottom: 10px; }
+button { padding: 12px; border: none; border-radius: 6px; background-color: #000; color: white; font-weight: bold; cursor: pointer; width: 100%; }
+button:hover { background-color: #333; }
+
+.resumen-pago { background: #f9f9f9; padding: 15px; border-radius: 6px; margin-bottom: 15px; font-weight: bold; }
+#total-txt { color: #27ae60; font-size: 18px; }
+
+.history-section { padding: 0 30px 30px 30px; }
+table { width: 100%; border-collapse: collapse; background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.03); border-radius: 12px; overflow: hidden; }
+th, td { padding: 15px; text-align: left; border-bottom: 1px solid #eaeaea; }
+th { background-color: #fafafa; font-weight: 600; }
+/* Arreglo general para inputs */
+.form-section input, .form-section select { width: 100%; }
+nav input { display: none; } /* Oculta cualquier input colado en la barra */
+
+/* Agrandar el contenedor principal para que el mapa crezca */
+.dashboard-container { height: 80vh; } /* Antes era 70vh */
+.map-section { flex: 2.5; } /* Le damos más espacio al mapa comparado con el formulario */
+
+/* Botones de búsqueda al lado de los inputs */
+.row-search { display: flex; gap: 5px; margin-bottom: 10px; }
+.btn-icon { width: 45px; background-color: #eee; color: #000; font-size: 18px; border: 1px solid #ddd; padding: 0; }
+.btn-icon:hover { background-color: #ddd; }
+#calc-route-btn { margin-bottom: 15px; }
+
+/* Botón de Ver Guía en la tabla */
+.btn-ver { background-color: #000; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; }
+.btn-ver:hover { background-color: #444; }
+
+/* Estilos del Modal (Ventana Emergente) */
+.modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); }
+.modal-content { background-color: #fff; margin: 5% auto; padding: 20px; border-radius: 10px; width: 400px; max-width: 90%; position: relative; }
+.close-btn { position: absolute; right: 15px; top: 10px; font-size: 24px; cursor: pointer; color: #888; }
+.close-btn:hover { color: #000; }
+
+/* Estilo del Ticket PDF */
+.ticket-design { border: 2px dashed #ccc; padding: 20px; text-align: left; }
+.ticket-design h2 { font-size: 18px; margin-bottom: 15px; text-align: center; border-bottom: none; }
+.ticket-design p { margin-bottom: 8px; font-size: 14px; }
+.qr-container { text-align: center; margin-top: 15px; }
+.qr-container img { width: 120px; height: 120px; border: 1px solid #eee; padding: 5px; }
+/* Asegurar que la barra de navegación acomode el botón a la derecha */
+.navbar { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 15px 30px; 
+    background: #fff; 
+    border-bottom: 1px solid #eee;
+}
+
+/* Estilo para que el botón de cerrar sesión se vea bien */
+#logout-btn {
+    background-color: #ff4d4d; /* Rojo para que resalte */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#logout-btn:hover {
+    background-color: #e60000;
+}

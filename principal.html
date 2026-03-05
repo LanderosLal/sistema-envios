@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Cotizar Envío</title>
+    <link rel="stylesheet" href="CSS/app.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <h2>Lands Envios</h2>
+        <button id="logout-btn">Cerrar Sesión</button>
+    </nav>
+
+    <div class="dashboard-container">
+        <div class="form-section">
+            <h3>Detalles del Envío</h3>
+            <div class="input-group">
+                <input type="text" id="destinatario" placeholder="Nombre del Destinatario" required>
+            </div>
+            <div class="input-group row">
+                <input type="number" id="peso" placeholder="Peso (kg)" required>
+                <select id="tipo-paquete">
+                    <option value="caja">Caja</option>
+                    <option value="bolsa">Bolsa</option>
+                </select>
+            </div>
+            
+            <h3>Ruta</h3>
+            <div class="input-group row-search">
+                <input type="text" id="origen" placeholder="Origen (Ej. Monterrey)">
+                <button type="button" class="btn-icon" id="btn-origen">📍</button>
+            </div>
+            <div class="input-group row-search">
+                <input type="text" id="destino" placeholder="Destino (Ej. CDMX)">
+                <button type="button" class="btn-icon" id="btn-destino">📍</button>
+            </div>
+            
+            <button type="button" id="calc-route-btn">Calcular Ruta Completa</button>
+
+            <div class="resumen-pago">
+                <p>Distancia: <span id="distancia-txt">0 km</span></p>
+                <p>Total a pagar: <span id="total-txt">$0 MXN</span></p>
+            </div>
+
+            <button id="confirm-envio-btn">Confirmar y Generar Guía</button>
+        </div>
+
+        <div class="map-section">
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <div class="history-section">
+        <h3>Mis Envíos Realizados</h3>
+        <table id="envios-table">
+            <thead>
+                <tr>
+                    <th>Destinatario</th>
+                    <th>Tipo</th>
+                    <th>Peso</th>
+                    <th>Ruta</th>
+                    <th>Costo</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody id="history-body"></tbody>
+        </table>
+    </div>
+
+    <div id="guia-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="cerrar-modal">&times;</span>
+            <div id="ticket-pdf" class="ticket-design">
+                <h2>📦 Lands Envíos - Guía Oficial</h2>
+                <div id="guia-details"></div>
+                <div class="qr-container">
+                    <img id="qr-code" src="" alt="QR de la Guía">
+                </div>
+            </div>
+            <button id="descargar-pdf" style="margin-top: 15px;">Descargar PDF</button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
