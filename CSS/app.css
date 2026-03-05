@@ -73,8 +73,10 @@ nav input { display: none; } /* Oculta cualquier input colado en la barra */
     border-radius: 6px;
     cursor: pointer;
     font-weight: bold;
+    max-width: 67px;
 }
 
 #logout-btn:hover {
     background-color: #e60000;
 }
+
